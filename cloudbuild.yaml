@@ -14,3 +14,11 @@ images:
 
 options:
   defaultLogsBucketBehavior: REGIONAL_USER_OWNED_BUCKET
+
+triggers:
+- name: sheehan-trigger 
+  github:
+    push:
+      branch: 'main'  
+  approval:
+    required: true
