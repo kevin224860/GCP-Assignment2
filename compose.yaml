@@ -4,6 +4,6 @@ services:
       context: .
     environment:
       NODE_ENV: production
-      PORT: 3000  # Ensure the application reads this port
+      PORT: 8080  # Ensure the application reads this port
     ports:
-      - 3000:3000  # Map container port 8080 to host port 8080
+      - 8080:8080  # Map container port 8080 to host port 8080
