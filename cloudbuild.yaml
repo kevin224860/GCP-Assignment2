@@ -10,7 +10,7 @@ steps:
     args:
       - 'run'
       - 'deploy'
-      - 'GCP-Assignment2-service'  # Replace with your Cloud Run service name
+      - 'GCP-Assignment2-service' # Replace with your Cloud Run service name
       - '--image'
       - 'us-central1-docker.pkg.dev/$PROJECT_ID/kevin224860/GCP-Assignment2:${SHORT_SHA}'
       - '--region'
@@ -22,10 +22,10 @@ images:
 options:
   defaultLogsBucketBehavior: REGIONAL_USER_OWNED_BUCKET
 
-triggers:
-- name: gcp-assignment2-trigger
-  github:
-    push:
-      branch: 'main'  # Or your branch name
-  approval:
-    required: true
+triggers:  <-- Triggers section at the top level
+- name: gcp-assignment2-trigger  <-- Two spaces
+  github:  <-- Two spaces
+    push:  <-- Four spaces
+      branch: 'main'  <-- Six spaces
+  approval:  <-- Two spaces
+    required: true  <-- Four spaces
