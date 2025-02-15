@@ -16,9 +16,9 @@ options:
   defaultLogsBucketBehavior: REGIONAL_USER_OWNED_BUCKET
 
 triggers:
-- name: sheehan-trigger 
+- name: sheehan-trigger
   github:
     push:
-      branch: 'main'  
+      branch: 'main'
   approval:
     required: true
