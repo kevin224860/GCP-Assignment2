@@ -14,12 +14,12 @@ steps:
     - 'deploy'
     - 'assignment2'
     - '--image'
-    - 'us-central1-docker.pkg.dev/semester-2-408906/kevin-100694236/assignment2:${SHORT_SHA}'
+    - 'us-central1-docker.pkg.dev/sem2-448017/kevin-100694236/assignment2:${SHORT_SHA}'
     - '--region'
     - 'us-central1'
     
 images:
-  - 'us-central1-docker.pkg.dev/semester-2-408906/kevin-100694236/assignment2:${SHORT_SHA}'
+  - 'us-central1-docker.pkg.dev/sem2-448017/kevin-100694236/assignment2:${SHORT_SHA}'
   
 options:
     defaultLogsBucketBehavior: REGIONAL_USER_OWNED_BUCKET
