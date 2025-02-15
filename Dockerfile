@@ -1,14 +1,18 @@
-FROM node:16-alpine
+# Use an official Node.js runtime as the base image
+FROM node:18
 
+# Set the working directory inside the container
 WORKDIR /app
 
-COPY package*.json ./  
+# Copy package.json and install dependencies (if applicable)
+COPY package.json ./
 RUN npm install
 
-COPY . /app       
+# Copy all application files into the container
+COPY . .
 
-ENV NODE_ENV production
+# Expose the correct port (adjust if necessary)
+EXPOSE 8080
 
-EXPOSE 3000
-
-CMD ["npm", "start"]
+# Start the application
+CMD ["npm", "start"]
