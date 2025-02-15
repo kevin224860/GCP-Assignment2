@@ -1,5 +1,4 @@
 steps:
-  # Step 1: Build Docker image
   - name: 'gcr.io/cloud-builders/docker'
     args: 
       - 'build'
@@ -7,27 +6,25 @@ steps:
       - 'us-central1-docker.pkg.dev/$PROJECT_ID/kevin-100694236/assignment2:${SHORT_SHA}'
       - '.' 
 
-  # Step 2: Push to Artifact Registry
   - name: 'gcr.io/cloud-builders/docker'
     args: 
       - 'push'
       - 'us-central1-docker.pkg.dev/$PROJECT_ID/kevin-100694236/assignment2:${SHORT_SHA}'
 
-  # Step 3: Deploy to Cloud Run (NEW STEP)
   - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
     entrypoint: gcloud
     args:
       - 'run'
       - 'deploy'
-      - 'assignment2-service'  # Your Cloud Run service name
+      - 'assignment2-service'  
       - '--image'
       - 'us-central1-docker.pkg.dev/$PROJECT_ID/kevin-100694236/assignment2:${SHORT_SHA}'
       - '--region'
-      - 'us-central1'  # Match your Artifact Registry region
+      - 'us-central1'  
       - '--platform'
       - 'managed'
-      - '--allow-unauthenticated'  # Allow public access
-
+      - '--allow-unauthenticated'  
+      
 images:
   - 'us-central1-docker.pkg.dev/$PROJECT_ID/kevin-100694236/assignment2:${SHORT_SHA}'
 
