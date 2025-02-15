@@ -1,31 +1,23 @@
 steps:
-  - name: 'gcr.io/cloud-builders/docker'
-    args: ['build', '-t', 'us-central1-docker.pkg.dev/$PROJECT_ID/kevin224860/GCP-Assignment2:${SHORT_SHA}', '.']
+  - name: 'gcr.io/cloud-builders/docker'  # Use the Docker Cloud Builder image
+    args: ['build', '-t', 'us-central1-docker.pkg.dev/$PROJECT_ID/kevin-100694236/assignment2:${SHORT_SHA}', '.']
+      # Build the Docker image.
+      # -t specifies the tag.
+      # The tag format is: us-central1-docker.pkg.dev/$PROJECT_ID/your-artifact-registry/your-image-name:${SHORT_SHA}
+      # . indicates the build context (current directory).
 
   - name: 'gcr.io/cloud-builders/docker'
-    args: ['push', 'us-central1-docker.pkg.dev/$PROJECT_ID/kevin224860/GCP-Assignment2:${SHORT_SHA}']
-
-  - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
-    entrypoint: gcloud
-    args:
-      - 'run'
-      - 'deploy'
-      - 'GCP-Assignment2-service' # Replace with your Cloud Run service name
-      - '--image'
-      - 'us-central1-docker.pkg.dev/$PROJECT_ID/kevin224860/GCP-Assignment2:${SHORT_SHA}'
-      - '--region'
-      - 'us-central1'
-
-images:
-  - 'us-central1-docker.pkg.dev/$PROJECT_ID/kevin224860/GCP-Assignment2:${SHORT_SHA}'
+    args: ['push', 'us-central1-docker.pkg.dev/$PROJECT_ID/kevin-100694236/assignment2:${SHORT_SHA}']
+      # Push the Docker image to Artifact Registry.
 
 options:
   defaultLogsBucketBehavior: REGIONAL_USER_OWNED_BUCKET
+    # Set the logs bucket behavior.
 
-triggers:  <-- Triggers section at the top level
-- name: gcp-assignment2-trigger  <-- Two spaces
-  github:  <-- Two spaces
-    push:  <-- Four spaces
-      branch: 'main'  <-- Six spaces
-  approval:  <-- Two spaces
-    required: true  <-- Four spaces
+triggers:
+- name: dc-firstname-studentid  # Cloud Build Trigger name
+  github:
+    push:
+      branch: 'main'  # Trigger on pushes to the 'main' branch (change if needed)
+  approval:
+    required: true  # Require approval before build execution
