@@ -1,19 +1,16 @@
 steps:
-  # Docker Build
   - name: 'gcr.io/cloud-builders/docker'
     args: ['build', '-t', 'us-central1-docker.pkg.dev/$PROJECT_ID/kevin224860/GCP-Assignment2:${SHORT_SHA}', '.']
 
-  # Docker Push
   - name: 'gcr.io/cloud-builders/docker'
     args: ['push', 'us-central1-docker.pkg.dev/$PROJECT_ID/kevin224860/GCP-Assignment2:${SHORT_SHA}']
 
-  # Cloud Run Deploy
   - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
     entrypoint: gcloud
     args:
       - 'run'
       - 'deploy'
-      - 'GCP-Assignment2-service' # Replace with your Cloud Run service name
+      - 'GCP-Assignment2-service'  # Replace with your Cloud Run service name
       - '--image'
       - 'us-central1-docker.pkg.dev/$PROJECT_ID/kevin224860/GCP-Assignment2:${SHORT_SHA}'
       - '--region'
@@ -26,9 +23,9 @@ options:
   defaultLogsBucketBehavior: REGIONAL_USER_OWNED_BUCKET
 
 triggers:
-- name: gcp-assignment2-trigger  # Give your trigger a descriptive name
+- name: gcp-assignment2-trigger
   github:
     push:
-      branch: 'main' # Or your branch name (e.g., 'main', 'develop')
+      branch: 'main'  # Or your branch name
   approval:
-    required: true  # Recommended for preventing accidental deployments
+    required: true
